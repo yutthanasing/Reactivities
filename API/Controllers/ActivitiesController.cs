@@ -30,7 +30,7 @@ namespace API.Controllers
             return Ok(await Mediator.Send(new Create.Common{Activity = activity}));
         }
 
-        [HttpPut("{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> UpdateActivity(Guid id, Activity activity)
         {
             activity.Id = id;
