@@ -3,7 +3,6 @@ import { Activity } from './../models/activity';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { history } from '../..';
-import { type } from 'node:os';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
