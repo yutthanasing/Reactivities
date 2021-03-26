@@ -11,36 +11,36 @@ namespace API.Controllers
 {
 
     public class ActivitiesController : BaseApiController
-    {       
+    {
         [HttpGet]
-        public async Task<ActionResult<List<Activity>>> GetActivities()
+        public async Task<ActionResult> GetActivities()
         {
-            return await Mediator.Send(new List.Query());
+            return HandleResult(await Mediator.Send(new List.Query())) ;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Activity>> GetActivity(Guid id)
+        public async Task<ActionResult> GetActivity(Guid id)
         {
-            return await Mediator.Send(new Detail.Query{Id = id});
+            return HandleResult(await Mediator.Send(new Detail.Query { Id = id }));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateActivity(Activity activity)
         {
-            return Ok(await Mediator.Send(new Create.Common{Activity = activity}));
+            return HandleResult(await Mediator.Send(new Create.Common { Activity = activity }));
         }
 
         [HttpPost("{id}")]
         public async Task<IActionResult> UpdateActivity(Guid id, Activity activity)
         {
             activity.Id = id;
-            return Ok(await Mediator.Send(new Edit.Common{Activity = activity}));
+            return HandleResult(await Mediator.Send(new Edit.Common { Activity = activity }));
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivity(Guid id)
         {
-            return Ok(await Mediator.Send(new Delete.Common{Id = id}));
+            return HandleResult(await Mediator.Send(new Delete.Common { Id = id }));
         }
     }
 
