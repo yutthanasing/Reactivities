@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Activities;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -15,7 +16,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult> GetActivities()
         {
-            return HandleResult(await Mediator.Send(new List.Query())) ;
+            return HandleResult(await Mediator.Send(new List.Query()));
         }
 
         [HttpGet("{id}")]
