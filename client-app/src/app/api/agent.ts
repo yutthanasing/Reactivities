@@ -79,7 +79,6 @@ const Account = {
     register: (user: UserFormValues) => requests.post<User>('/account/register', user)
 }
 
-
 const agent = {
     Activies,
     Account
