@@ -48,5 +48,4 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new UpdateAttendance.Common { Id = id }));
         }
     }
-
 }

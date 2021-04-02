@@ -1,6 +1,6 @@
 import { User, UserFormValues } from './../models/user';
 import { store } from './../stores/store';
-import { Activity } from './../models/activity';
+import { Activity, ActivityFormValues } from './../models/activity';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { history } from '../..';
@@ -44,7 +44,8 @@ axios.interceptors.response.use(async response => {
             }
             break;
         case 401:
-            toast.error("unauthorised");
+            history.push('/not-found');
+            //toast.error("unauthorised");
             break;
         case 404:
             history.push('/not-found');
@@ -68,9 +69,10 @@ const requests = {
 const Activies = {
     list: () => requests.get<Activity[]>('/activities'),
     detail: (id: string) => requests.get<Activity>(`/activities/${id}`),
-    create: (activity: Activity) => axios.post<void>('/activities', activity),
-    update: (activity: Activity) => axios.post<void>(`/activities/${activity.id}`, activity),
-    delete: (id: string) => axios.delete<void>(`/activities/${id}`)
+    create: (activity: ActivityFormValues) => requests.post<void>('/activities', activity),
+    update: (activity: ActivityFormValues) => requests.put<void>(`/activities/${activity.id}`, activity),
+    delete: (id: string) => requests.del<void>(`/activities/${id}`),
+    attend:(id : string) => requests.post<void>(`/activities/${id}/attend`, {})
 }
 
 const Account = {
